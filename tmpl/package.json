@@ -1,0 +1,16 @@
+{
+  "name": "transformer.{{ id }}",
+  "version": "0.0.1",
+  "description": "transformer {{ kind }}: {{ desc }}",
+  "main": "index.js",
+  "transformer": "transformer.jsonld",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "transformer",
+    "module",
+    "transformer-{{ kind }}"
+  ],
+  "license": "MIT"
+}

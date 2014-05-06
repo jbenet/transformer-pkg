@@ -1,0 +1,27 @@
+{
+  "name": "transformer-pkg",
+  "version": "0.0.1",
+  "description": "transformer package helper",
+  "main": "index.js",
+  "bin": {
+    "transform": "cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/jbenet/transformer-pkg.git"
+  },
+  "keywords": [
+    "transformer",
+    "pkg",
+    "module",
+    "pkginit"
+  ],
+  "author": "https://github.com/jbenet",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jbenet/transformer-pkg/issues"
+  }
+}

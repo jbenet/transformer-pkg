@@ -1,4 +1,4 @@
-var transformer = require('transformer');
+var transformer = require('dat-transformer');
 var {{ var1 }} = transformer('{{ id1 }}');
 var {{ var2 }} = transformer('{{ id2 }}');
 // require any other modules you may need here.

@@ -34,6 +34,8 @@ package.json
 > cat index.js        # below
 ```
 
+#### type `package.json`
+
 ```json
 {
   "name": "transformer.unix-time",
@@ -52,6 +54,8 @@ package.json
   "license": "MIT"
 }
 ```
+
+#### type `index.js`
 
 ```js
 var transformer = require('dat-transformer');
@@ -81,6 +85,8 @@ package.json
 > cat index.js        # below
 ```
 
+#### conversion `package.js`
+
 ```json
 {
   "name": "transformer.unix-time-to-js-date",
@@ -99,6 +105,8 @@ package.json
   "license": "MIT"
 }
 ```
+
+#### conversion `index.js`
 
 ```js
 var transformer = require('dat-transformer');

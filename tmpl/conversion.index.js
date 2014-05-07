@@ -9,9 +9,9 @@ function convert(input, callback) {
   // compute the conversion output
   var output = YOUR CODE HERE;
 
-  // call the callback with result.
-  callback(output);
+  // if an error ocurrs, send it in the callback
+  callback(Error('{{ var0 }} not implemented'));
 
-  // if an error ocurrs, throw an exception:
-  throw new Error('{{ var0 }} not implemented')
+  // else, call the callback with result.
+  callback(null, output);
 }

@@ -1,10 +1,17 @@
 var rw = require('rw');
-var prompt = require('sync-prompt').prompt;
+var S = require('string');
+var prompts = require('./prompts');
 var template = require('./template');
+
+// classify func
+classify = function(input) {
+  input = 't ' + input; // to avoid clashes with things like 'String'.
+  return S(input).camelize().s;
+};
 
 module.exports = function(argv) {
 
-  var opts = {
+  var args = {
     kind: (argv._[0] || '').toLowerCase(),
     id: (argv._[1] || '').toLowerCase(),
     desc: argv._[2],
@@ -12,62 +19,39 @@ module.exports = function(argv) {
   }
 
   // fill in missing things with prompts.
-  opts = promptOptions(opts);
-  if (opts.kind == 'type')
-    initType(opts);
-  else if (opts.kind == 'conversion')
-    initConversion(opts);
+  prompts.kind(args);
+
+  if (args.kind == 'type')
+    initType(args);
+  else if (args.kind == 'conversion')
+    initConversion(args);
   else
     throw new Error('cannot init unknown module kind: ' + opts.kind);
 }
 
 
-function promptOptions(opts) {
-  // prompt for kind
-  if (opts.kind != 'type' && opts.kind != 'conversion') {
-    while (opts.kind != 'type' && opts.kind != 'conversion') {
-      var input = prompt('Module kind (Type or Conversion): ').toLowerCase();
-      if (input[0] == 't')
-        opts.kind = 'type';
-      else if (input[0] == 'c')
-        opts.kind = 'conversion';
-    }
-  } else {
-    console.log('Module kind: ' + opts.kind)
-  }
-
-
-  // prompt for id
-  if (!opts.id) {
-    while (!opts.id) {
-      var pat = '[a-z0-9-]+';
-      var input = prompt('Module id (' + pat + '): ').toLowerCase();
-      if (input.match(RegExp('^'+pat+'$')))
-        opts.id = input;
-    }
-  } else {
-    console.log('Module id: ' + opts.id);
-  }
-
-  // prompt for desc
-  if (!opts.desc) {
-    while (!opts.desc) {
-      opts.desc = prompt('Module description: ');
-    }
-  } else {
-    console.log('Module description: ' + opts.id)
-  }
-
-  return opts;
-}
-
-
 function initType(vars) {
+
+  prompts.type(vars, 'id', 'type-id');
+  prompts.desc(vars);
+
   write('index.js', template('type.index.js', vars));
   write('package.json', template('package.json', vars));
 }
 
-function initConversion(opts) {
+function initConversion(vars) {
+  prompts.type(vars, 'id1', 'Convert From type-id');
+  prompts.type(vars, 'id2', 'Convert To type-id');
+
+  vars.id = vars.id1 + '-to-' + vars.id2;
+  console.log('Transformer conversion-id: ' + vars.id);
+
+  vars.var0 = classify(vars.id);
+  vars.var1 = classify(vars.id1);
+  vars.var2 = classify(vars.id2);
+
+  prompts.desc(vars);
+
   write('index.js', template('conversion.index.js', vars));
   write('package.json', template('package.json', vars));
 }

@@ -3,11 +3,9 @@ var {{ var1 }} = transformer('{{ id1 }}');
 var {{ var2 }} = transformer('{{ id2 }}');
 // require any other modules you may need here.
 
-module.exports = new Conversion({{ var0 }}, {
-  'id': '{{ id }}',
-}, {{ var1 }}, {{ var2 }});
+module.exports = new transformer.Conversion({{ var1 }}, {{ var2 }}, convert);
 
-function {{ var0 }}(input, callback) {
+function convert(input, callback) {
   // compute the conversion output
   var output = YOUR CODE HERE;
 

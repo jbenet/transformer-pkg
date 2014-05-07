@@ -54,7 +54,8 @@ function initConversion(vars) {
   vars.var1 = classify(vars.id1);
   vars.var2 = classify(vars.id2);
 
-  prompts.desc(vars);
+  // has default desc. no need to prompt.
+  // prompts.desc(vars);
 
   write('index.js', template('conversion.index.js', vars));
   write('package.json', template('package.json', vars));

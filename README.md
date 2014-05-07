@@ -106,11 +106,9 @@ var tUnixTime = transformer('unix-time');
 var tJsDate = transformer('js-date');
 // require any other modules you may need here.
 
-module.exports = new Conversion(tUnixTimeToJsDate, {
-  'id': 'unix-time-to-js-date',
-}, tUnixTime, tJsDate);
+module.exports = new transformer.Conversion(tUnixTime, tJsDate, convert);
 
-function tUnixTimeToJsDate(input, callback) {
+function convert(input, callback) {
   // compute the conversion output
   var output = YOUR CODE HERE;
 

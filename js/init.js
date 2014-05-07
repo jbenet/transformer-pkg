@@ -1,7 +1,9 @@
 var rw = require('rw');
+var fs = require('fs');
 var S = require('string');
 var prompts = require('./prompts');
 var template = require('./template');
+var forceFlag = false;
 
 // classify func
 classify = function(input) {
@@ -10,6 +12,9 @@ classify = function(input) {
 };
 
 module.exports = function(argv) {
+  // ensure can write files.
+  forceFlag = argv.f || argv.force || forceFlag;
+  ['package.json', 'index.js'].forEach(assertCanWriteFile);
 
   var args = {
     kind: (argv._[0] || '').toLowerCase(),
@@ -31,7 +36,6 @@ module.exports = function(argv) {
 
 
 function initType(vars) {
-
   prompts.type(vars, 'id', 'type-id');
   prompts.desc(vars);
 
@@ -57,5 +61,12 @@ function initConversion(vars) {
 }
 
 function write(filename, contents) {
+  assertCanWriteFile(filename);
   rw.writeSync(filename, contents, 'utf-8');
+}
+
+function assertCanWriteFile(filename) {
+  if (fs.existsSync(filename) && !forceFlag) {
+    throw new Error('transformer-pkg: ' + filename + ' exists. -f overwrites.');
+  }
 }

@@ -10,13 +10,21 @@ function usage() {
   console.log('  init [<kind> <id> <description> <schema>]');
   console.log('  publish');
   console.log('');
+  console.log('Flags:');
+  console.log('');
+  console.log('  -f --force  Overwrite existing files.');
+  console.log('');
 }
 
 try {
   pkg(argv);
 } catch (e) {
-  if (e.toString().match(/unknown command/)) {
+  var s = e.toString();
+  if (s.match(/unknown command/)) {
     usage();
+  } else if (s.match(/-f overwrites/)) {
+    console.log(s);
+    process.exit(-1);
   } else {
     throw e;
   }

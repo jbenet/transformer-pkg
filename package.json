@@ -4,7 +4,7 @@
   "description": "transformer package helper",
   "main": "index.js",
   "bin": {
-    "transform": "cli.js"
+    "transformer-pkg": "cli.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

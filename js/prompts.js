@@ -37,7 +37,24 @@ p.desc = function (args) {
       args.desc = prompt('Transformer description: ');
     }
   } else {
-    console.log('Transformer description: ' + args.id)
+    console.log('Transformer description: ' + args.desc)
+  }
+
+  return args;
+}
+
+p.async = function (args) {
+  // prompt for async
+  if (!args.async) {
+    while (!args.async) {
+      var input = prompt('Conversion is `async` or `sync`: ');
+      if (input[0] == 'a')
+        args.async = 'async';
+      else if (input[0] == 's')
+        args.async = 'sync';
+    }
+  } else {
+    console.log('Conversion is ' + args.async)
   }
 
   return args;

@@ -57,7 +57,10 @@ function initConversion(vars) {
   // has default desc. no need to prompt.
   // prompts.desc(vars);
 
-  write('index.js', template('conversion.index.js', vars));
+  prompts.async(vars);
+
+  var f = 'conversion.' + vars.async + '.index.js';
+  write('index.js', template(f, vars));
   write('package.json', template('package.json', vars));
 }
 

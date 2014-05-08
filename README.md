@@ -137,17 +137,19 @@ var tUnixTime = transformer('unix-time');
 var tJsDate = transformer('js-date');
 // require any other modules you may need here.
 
-module.exports = transformer.Conversion(tUnixTime, tJsDate, convert);
+module.exports = transformer.Conversion(tUnixTime, tJsDate, convert, {
+  async: true, // explicitly mark this callback as async. important.
+});
 
-// this is a synchronous conversion.
-function convert(input) {
+// this is an asynchronous conversion.
+function convert(input, callback) {
   // compute the conversion output
   var output = YOUR CODE HERE;
 
-  // if an error ocurrs, throw it.
-  throw new Error('tUnixTimeToJsDate not implemented');
+  // if an error ocurrs, send it in the callback (first arg).
+  callback(Error('tUnixTimeToJsDate not implemented'));
 
-  // else, return the result.
-  return output;
+  // else, call the callback with result (second arg).
+  callback(null, output);
 }
 ```

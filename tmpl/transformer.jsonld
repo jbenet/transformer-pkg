@@ -1,0 +1,6 @@
+{
+  "@context": "{{ transformer.contextUrl }}",
+  "id": "{{ id }}",
+  "type": "{{ kind }}",
+  "description": "{{ desc }}"
+}

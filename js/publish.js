@@ -1,26 +1,23 @@
-var rw = require('rw');
 var fs = require('fs');
 var npm = require("npm");
-
-var log = function(s) {
-  console.log('=====> ' + s);
-}
+var util = require("./util");
 
 module.exports = function(argv) {
 
   var mod = transformerModule();
   writeTransformerSrc(mod);
 
-  log('running `npm init`')
+  util.log('running `npm init`')
   npm.load({}, function (err) {
     if (err) throw err;
     npm.commands.init([], function(err, data) {
       if (err) throw err;
 
       console.log('\n');
-      log('running `npm publish`');
+      util.log('running `npm publish`');
       npm.commands.publish([], function(err, data) {
         if (err) throw err;
+        util.log('publish done');
       });
     });
   });
@@ -31,7 +28,7 @@ function transformerModule() {
   if (!fs.existsSync('package.json'))
     throw new Error('Must have file: package.json')
 
-  var pkg = JSON.parse(rw.readSync('package.json'), 'utf-8');
+  var pkg = util.pkg();
   if (!pkg.transformer)
     throw new Error('transformer package.json must include transformer key.');
 
@@ -51,10 +48,5 @@ function transformerModule() {
 
 function writeTransformerSrc(mod) {
   var json = JSON.stringify(mod.src, undefined, 1) + '\n';
-  write('transformer.jsonld', json);
-}
-
-function write(filename, contents) {
-  rw.writeSync(filename, contents, 'utf-8');
-  log('wrote ' + filename);
+  util.write('transformer.jsonld', json, true);
 }

@@ -67,6 +67,7 @@ function initConversion(vars) {
 function write(filename, contents) {
   assertCanWriteFile(filename);
   rw.writeSync(filename, contents, 'utf-8');
+  console.log('wrote ' + filename);
 }
 
 function assertCanWriteFile(filename) {

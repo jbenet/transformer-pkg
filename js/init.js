@@ -41,6 +41,7 @@ function initType(vars) {
 
   write('index.js', template('type.index.js', vars));
   write('package.json', template('package.json', vars));
+  write('README.md', template('README.md', vars));
 }
 
 function initConversion(vars) {
@@ -62,6 +63,7 @@ function initConversion(vars) {
   var f = 'conversion.' + vars.async + '.index.js';
   write('index.js', template(f, vars));
   write('package.json', template('package.json', vars));
+  write('README.md', template('README.md', vars));
 }
 
 function write(filename, contents) {

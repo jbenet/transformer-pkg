@@ -12,5 +12,8 @@
     "module",
     "transformer-{{ kind }}"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "dat-transformer": "~0.1.2"
+  }
 }

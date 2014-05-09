@@ -2,6 +2,8 @@
 
 Tool to automate lots of [transformer](http://github.com/jbenet/transformer) module writing.
 
+[![dat](http://img.shields.io/badge/Development%20sponsored%20by-dat-green.svg?style=flat)](http://dat-data.com)
+
 ## Usage
 
 ```

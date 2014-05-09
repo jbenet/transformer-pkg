@@ -1,6 +1,6 @@
 {
   "name": "transformer-pkg",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "transformer package helper",
   "main": "index.js",
   "bin": {
@@ -20,7 +20,7 @@
     "pkginit"
   ],
   "author": "https://github.com/jbenet",
-  "license": "MIT",
+  "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/jbenet/transformer-pkg/issues"
   },
@@ -31,5 +31,9 @@
     "sync-prompt": "~0.2.2",
     "minimist": "0.0.8",
     "npm": "~1.4.10"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {}
 }

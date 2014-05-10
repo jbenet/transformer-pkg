@@ -11,10 +11,18 @@ This module is a transformer {{ kind }}, published on npm. Read more about trans
 
 Use this module through transformer.
 
+{% if id1 %}
 ### Commandline
 
-( TODO: Write examples of module used in the commandline. )
+```
+> echo '<SAMPLE INPUT>' | transform {{ id1 }} {{ id2 }}
+<SAMPLE OUTPUT>
+```
 
 ### Javascript
 
-( TODO: Write examples of module used in javascript. )
+```js
+var transformer = require('dat-transformer');
+var {{ var0 }} = transformer('{{ id1 }}', '{{ id2 }}');
+{{ var0 }}('<SAMPLE INPUT>'); // <SAMPLE OUTPUT>
+```{% endif %}

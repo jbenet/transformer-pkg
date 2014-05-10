@@ -7,16 +7,19 @@ Tool to automate lots of [transformer](http://github.com/jbenet/transformer) mod
 ## Usage
 
 ```
-Usage: /usr/local/bin/transformer-pkg <subcommand>
+Usage: transformer-pkg <subcommand>
 
 Subcommands:
 
-  init [<kind> <id> <description> <schema>]
-  publish
+  init [<kind>]  -- generate module files
+  src            -- update transformer.jsonld
+  test           -- src, then npm test
+  publish        -- src, then npm publish
 
 Flags:
 
   -f --force  Overwrite existing files.
+  -h --help   Show these instructions. :)
 ```
 
 ## Examples
@@ -29,11 +32,33 @@ Flags:
 Transformer kind: type
 Transformer type-id ([a-z0-9-]+): unix-time
 Transformer description: Unixtime date, number of seconds since 1970.
+transformer-pkg --> wrote index.js
+transformer-pkg --> wrote test.js
+transformer-pkg --> wrote README.md
+transformer-pkg --> wrote package.json
+transformer-pkg --> wrote transformer.jsonld
+transformer-pkg --> init done.
+
+Next, you should:
+
+- run `npm install`
+- modify index.js, test.js, and README.md as needed
+- run `transformer-pkg test` till it works.
+- run `transformer-pkg publish` to ship!
+
+transformer-pkg publish will:
+
+1. run `npm init` to prompt for npm package details
+2. update `transformer.jsonld` with the latest src
+3. run `npm publish`
+
 > ls
+README.md
 index.js
 package.json
-> cat package.json    # below
-> cat index.js        # below
+test.js
+transformer.jsonld
+> cat * # below
 ```
 
 #### type `package.json`
@@ -46,14 +71,16 @@ package.json
   "main": "index.js",
   "transformer": "transformer.jsonld",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test.js"
   },
   "keywords": [
     "transformer",
-    "module",
     "transformer-type"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "dat-transformer": "~0.1.3"
+  }
 }
 ```
 
@@ -70,21 +97,66 @@ module.exports = new transformer.Type({
 });
 ```
 
+#### type `test.js`
+
+```
+#!/usr/bin/env node
+var transformer = require('dat-transformer');
+var type = require('./');
+
+// run stock type tests
+var test = transformer.test.type(type);
+
+
+// that should be enough, but you can also run your own tests:
+/*
+
+test('your test description', function (t) {
+  YOUR TEST CODE HERE
+  t.end();
+});
+
+*/
+```
+
 ### transformer-pkg init conversion
 
 ```
 > ls
-> transformer-pkg init conversion -f
+> transformer-pkg init conversion
 Transformer kind: conversion
 Transformer Convert From type-id ([a-z0-9-]+): unix-time
 Transformer Convert To type-id ([a-z0-9-]+): js-date
-Transformer conversion-id: unix-time-to-js-date
-Transformer description: Converts Unixtime to a JS Date object.
+transformer-pkg --> Transformer conversion-id: unix-time-to-js-date
+Conversion is `async` or `sync`: sync
+transformer-pkg --> wrote index.js
+transformer-pkg --> wrote test.js
+transformer-pkg --> wrote README.md
+transformer-pkg --> wrote package.json
+transformer-pkg --> wrote transformer.jsonld
+transformer-pkg --> init done.
+
+Next, you should:
+
+- run `npm install`
+- run `npm install --save transformer.unix-time transformer.js-date`
+- modify index.js, test.js, and README.md as needed
+- run `transformer-pkg test` till it works.
+- run `transformer-pkg publish` to ship!
+
+transformer-pkg publish will:
+
+1. run `npm init` to prompt for npm package details
+2. update `transformer.jsonld` with the latest src
+3. run `npm publish`
+
 > ls
+README.md
 index.js
 package.json
-> cat package.json    # below
-> cat index.js        # below
+test.js
+transformer.jsonld
+> cat * # below
 ```
 
 #### conversion `package.js`
@@ -93,18 +165,20 @@ package.json
 {
   "name": "transformer.unix-time-to-js-date",
   "version": "0.0.1",
-  "description": "transformer conversion: Converts Unixtime to a JS Date object.",
+  "description": "transformer conversion: unix-time to js-date",
   "main": "index.js",
   "transformer": "transformer.jsonld",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test.js"
   },
   "keywords": [
     "transformer",
-    "module",
     "transformer-conversion"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "dat-transformer": "~0.1.3"
+  }
 }
 ```
 
@@ -154,4 +228,31 @@ function convert(input, callback) {
   // else, call the callback with result (second arg).
   callback(null, output);
 }
+```
+
+#### conversion sync `test.js`
+
+```js
+#!/usr/bin/env node
+var transformer = require('dat-transformer');
+var conv = require('./');
+
+// run stock conversion tests, and try expected input/output pairs
+var test = transformer.test.conversion(conv, [
+  // [input, expectedOutput]
+  ADD YOUR TEST PAIRS HERE
+])
+
+
+// that should be enough, but you can also run your own tests:
+/*
+
+test('your test description', function (t) {
+  YOUR TEST CODE HERE
+  // test conversions this way:
+  test.converts(t, conv, input, expectedOutput)
+  t.end();
+});
+
+*/
 ```

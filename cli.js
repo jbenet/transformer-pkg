@@ -7,8 +7,10 @@ function usage() {
   console.log('');
   console.log('Subcommands:');
   console.log('');
-  console.log('  init [<kind> <id> <description> <schema>]');
-  console.log('  publish');
+  console.log('  init [<kind>]  -- generate module files');
+  console.log('  src            -- update transformer.jsonld');
+  console.log('  test           -- src, then npm test');
+  console.log('  publish        -- src, then npm publish');
   console.log('');
   console.log('Flags:');
   console.log('');

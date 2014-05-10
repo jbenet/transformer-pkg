@@ -1,6 +1,6 @@
 {
   "name": "transformer-pkg",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "transformer package helper",
   "main": "index.js",
   "bin": {

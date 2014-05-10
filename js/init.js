@@ -31,7 +31,7 @@ module.exports = function(argv) {
 
   // run npm install
   util.log('init done.');
-  console.log(postInitDirections);
+  console.log(template('post-init.txt', vars));
 }
 
 
@@ -64,18 +64,3 @@ function initConversion(vars) {
   util.write('index.js', template(f, vars));
   util.write('test.js', template('conversion.test.js', vars));
 }
-
-var postInitDirections = '\n\
-Next, you should:\n\
-\n\
-- run `npm install`\n\
-- modify index.js, test.js, and README.md as needed\n\
-- run `transformer-pkg test` till it works.\n\
-- run `transformer-pkg publish` to ship! \n\
-\n\
-transformer-pkg publish will:\n\
-\n\
-1. run `npm init` to prompt for npm package details\n\
-2. update `transformer.jsonld` with the latest src\n\
-3. run `npm publish`\n\
-'

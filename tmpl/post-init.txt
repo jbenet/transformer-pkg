@@ -1,0 +1,14 @@
+
+Next, you should:
+
+- run `npm install`{% if id1 %}
+- run `npm install --save transformer.{{ id1 }} transformer.{{ id2 }}`{% endif %}
+- modify index.js, test.js, and README.md as needed
+- run `transformer-pkg test` till it works.
+- run `transformer-pkg publish` to ship!
+
+transformer-pkg publish will:
+
+1. run `npm init` to prompt for npm package details
+2. update `transformer.jsonld` with the latest src
+3. run `npm publish`

@@ -1,8 +1,7 @@
 
 Next, you should:
 
-- run `npm install`{% if id1 %}
-- run `npm install --save transformer.{{ id1 }} transformer.{{ id2 }}`{% endif %}
+- run `npm install --save dat-transformer{% if id1 %} transformer.{{ id1 }} transformer.{{ id2 }}`{% endif %}
 - modify index.js, test.js, and README.md as needed
 - run `transformer-pkg test` till it works.
 - run `transformer-pkg publish` to ship!

@@ -10,8 +10,5 @@
   "keywords": [
     "transformer",
     "transformer-{{ kind }}"
-  ],
-  "dependencies": {
-    "dat-transformer": "~0.1.3"
-  }
+  ]
 }

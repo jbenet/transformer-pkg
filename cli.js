@@ -15,7 +15,13 @@ function usage() {
   console.log('Flags:');
   console.log('');
   console.log('  -f --force  Overwrite existing files.');
+  console.log('  -h --help   Show these instructions. :)');
   console.log('');
+}
+
+if (argv.h || argv.help) {
+  usage();
+  process.exit(0);
 }
 
 try {

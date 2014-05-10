@@ -5,15 +5,14 @@
   "main": "index.js",
   "transformer": "transformer.jsonld",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test.js"
   },
   "keywords": [
     "transformer",
-    "module",
     "transformer-{{ kind }}"
   ],
   "license": "MIT",
   "dependencies": {
-    "dat-transformer": "~0.1.2"
+    "dat-transformer": "~0.1.3"
   }
 }

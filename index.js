@@ -10,3 +10,5 @@ var pkg = module.exports = function(argv) {
 // load individual commands.
 pkg.init = require('./js/init');
 pkg.publish = require('./js/publish');
+pkg.src = require('./js/src');
+pkg.test = require('./js/test');

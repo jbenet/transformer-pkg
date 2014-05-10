@@ -40,6 +40,7 @@ function initType(vars) {
   prompts.desc(vars);
 
   util.write('index.js', template('type.index.js', vars));
+  util.write('test.js', template('type.test.js', vars));
 }
 
 function initConversion(vars) {
@@ -61,14 +62,15 @@ function initConversion(vars) {
 
   var f = 'conversion.' + vars.async + '.index.js';
   util.write('index.js', template(f, vars));
+  util.write('test.js', template('conversion.test.js', vars));
 }
 
 var postInitDirections = '\n\
 Next, you should:\n\
 \n\
 - run `npm install`\n\
-- modify index.js, README.md as needed\n\
-- run `npm test`\n\
+- modify index.js, test.js, and README.md as needed\n\
+- run `transformer-pkg test` till it works.\n\
 - run `transformer-pkg publish` to ship! \n\
 \n\
 transformer-pkg publish will:\n\

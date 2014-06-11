@@ -24,5 +24,5 @@ Use this module through transformer.
 ```js
 var transformer = require('dat-transformer');
 var {{ var0 }} = transformer('{{ id1 }}', '{{ id2 }}');
-{{ var0 }}('<SAMPLE INPUT>'); // <SAMPLE OUTPUT>
+{{ var0 }}('<SAMPLE INPUT>'); // '<SAMPLE OUTPUT>'
 ```{% endif %}

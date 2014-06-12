@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-var transformer = require('dat-transformer');
-var type = require('./');
+var transformerTest = require('transformer-test')
+var type = require('./')
 
 // run stock type tests
-var test = transformer.test.type(type);
+var test = transformerTest.type(type)
 
 
 // that should be enough, but you can also run your own tests:
@@ -11,7 +11,7 @@ var test = transformer.test.type(type);
 
 test('your test description', function (t) {
   YOUR TEST CODE HERE
-  t.end();
-});
+  t.end()
+})
 
 */
